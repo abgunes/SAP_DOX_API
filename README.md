@@ -10,7 +10,7 @@ You can use this template if you want to send documents to DOX api and get them 
 
 * client_id : number 1
 * client_secret : number 2
-* token_url : concanate number 3 and /outh/token
+* token_url : concanate number 3 and /outh/token like "https://xxxxtrial.authentication.us10.hana.ondemand.com/oauth/token"
 
 <img src="https://github.com/abgunes/SAP_DOX_API/blob/main/images/img2.png" raw=true width="921" height="597"/>
 
