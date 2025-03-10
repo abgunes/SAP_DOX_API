@@ -1,0 +1,243 @@
+{
+	"info": {
+		"name": "SAP  DOX Api",
+		"description": "# 🚀 Access DOX api From Postman\n\nYou can use this template if you want to send documents to DOX api and get them in json format. Just add your variables to the Master Folder Variables and add your document to the Post Doc method.\n\nbase_url : [https://aiservices-trial-dox.cfapps.us10.hana.ondemand.com](https://aiservices-trial-dox.cfapps.us10.hana.ondemand.com)\n\n<img src=\"https://content.pstmn.io/9c459dd2-602c-4220-926e-cd5dece6607c/aW1hZ2UucG5n\" width=\"921\" height=\"251\">\n\nclient_id : number 1\n\nclient_secret : number 2\n\ntoken_url : concanate number 3 and /outh/token\n\n<img src=\"https://content.pstmn.io/c711435d-6a3b-48c9-912b-3300f0490a71/aW1hZ2UucG5n\" width=\"920\" height=\"597\">\n\nReference : [Explore and Infuse DOX capabilities in SAP BTP custom applications](https://community.sap.com/t5/technology-blogs-by-members/explore-and-infuse-dox-capabilities-in-sap-btp-custom-applications/ba-p/13706066)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+	},
+	"item": [
+		{
+			"name": "Post Doc",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let jsonData = pm.response.json();",
+							"pm.collectionVariables.set(\"document_id\", jsonData.id);",
+							"",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"user-agent": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "options",
+							"value": "{\n\"extraction\": {\n\"headerFields\": [\n\"purchaseOrderNumber\",\n\"netAmount\",\n\"senderAddress\",\n\"currencyCode\"\n],\n\"lineItemFields\": [\n\"description\",\n\"netAmount\",\n\"quantity\",\n\"unitPrice\",\n\"materialNumber\",\n\"unitOfMeasure\"\n]\n},\n\"clientId\": \"default\"\n}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/document-information-extraction/v1/document/jobs",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"document-information-extraction",
+						"v1",
+						"document",
+						"jobs"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "Read Posted Data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"user-agent": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{base_url}}/document-information-extraction/v1/document/jobs/{{document_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"document-information-extraction",
+						"v1",
+						"document",
+						"jobs",
+						"{{document_id}}"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "refreshRequestParams",
+				"value": [],
+				"type": "any"
+			},
+			{
+				"key": "tokenRequestParams",
+				"value": [],
+				"type": "any"
+			},
+			{
+				"key": "authRequestParams",
+				"value": [],
+				"type": "any"
+			},
+			{
+				"key": "tokenName",
+				"value": "Document",
+				"type": "string"
+			},
+			{
+				"key": "challengeAlgorithm",
+				"value": "S256",
+				"type": "string"
+			},
+			{
+				"key": "redirect_uri",
+				"value": "https://xxxtrial.authentication.{region}.hana.ondemand.com/oauth/token",
+				"type": "string"
+			},
+			{
+				"key": "grant_type",
+				"value": "client_credentials",
+				"type": "string"
+			},
+			{
+				"key": "clientSecret",
+				"value": "{{client_secret}}",
+				"type": "string"
+			},
+			{
+				"key": "clientId",
+				"value": "{{client_id}}",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			},
+			{
+				"key": "client_authentication",
+				"value": "header",
+				"type": "string"
+			},
+			{
+				"key": "accessTokenUrl",
+				"value": "{{token_url}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"\r",
+					"\r",
+					"\r",
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"value": "",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "token_url",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "client_id",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "client_secret",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "base_url",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "document_id",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
