@@ -4,13 +4,13 @@
 
 You can use this template if you want to send documents to DOX api and get them in json format. Just add your variables to the Master Folder Variables and add your document to the Post Doc method.
 
-![Logo](https://github.com/abgunes/SAP_DOX_API/blob/main/images/img1.png)
+* base_url :
 
 <img src="https://github.com/abgunes/SAP_DOX_API/blob/main/images/img1.png" raw=true width="921" height="251"/>
 
-client_id : number 1
-client_secret : number 2
-token_url : concanate number 3 and /outh/token
+* client_id : number 1
+* client_secret : number 2
+* token_url : concanate number 3 and /outh/token
 
 <img src="https://github.com/abgunes/SAP_DOX_API/blob/main/images/img2.png" raw=true width="921" height="597"/>
 
